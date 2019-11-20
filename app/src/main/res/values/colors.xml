@@ -6,4 +6,7 @@
     <color name="colorWrite">#ffffffff</color>
     <color name="colorWriteStroke">#7fffffff</color>
     <color name="colorBlack_95">#0c040404</color>
+    <color name="color_black_30">#B2000000</color>
+    <color name="color_ff7f1d">#ff7f1d</color>
+    <color name="color_adadad">#adadad</color>
 </resources>

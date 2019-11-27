@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".main.MainActivity">
 
     <FrameLayout
+        android:id="@+id/fl_main_content"
         android:layout_above="@+id/fl_main_bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

@@ -1,4 +1,4 @@
-package com.Dzh.todayinformation;
+package com.Dzh.todayinformation.base;
 
 
 import java.lang.annotation.Retention;

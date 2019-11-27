@@ -1,9 +1,9 @@
-package com.Dzh.todayinformation;
+package com.Dzh.todayinformation.mvp;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-public interface ILifeCircle
+public interface ILifeCircle  // 一个最基本的接口，包含了声明周期里所有的方法
 {
     void onCreate(Bundle saveInstanceState, Intent intent,Bundle getArguments);
 
@@ -13,9 +13,11 @@ public interface ILifeCircle
 
     void onResume();
 
+    void onPause();
     void onStop();
 
     void destroyView();
+    void onDestroy();
 
     void onViewDestroy();
 
@@ -25,6 +27,6 @@ public interface ILifeCircle
 
     void onSaveInstanceState(Bundle bundle);
 
-    void attachView();
+    void attachView(IMvpView iMvpView);
 
 }

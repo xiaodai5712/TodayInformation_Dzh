@@ -1,39 +1,36 @@
-package com.Dzh.todayinformation;
+package com.Dzh.todayinformation.splash;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.Dzh.todayinformation.base.BaseActivity;
+import com.Dzh.todayinformation.main.MainActivity;
+import com.Dzh.todayinformation.R;
+import com.Dzh.todayinformation.base.ViewInject;
 
 import java.io.File;
 
 import butterknife.BindView;
 
 @ViewInject(mainLayoutId = R.layout.activity_splash)
-public class SplashActivity extends BaseActivity
+public class SplashActivity extends BaseActivity implements ISplashActivityContract.IView
 {
     @BindView(R.id.vv_play)
     FullScreenVideoView mVideoView;
     @BindView(R.id.tv_splash_timer)
     TextView mTvTimer;
 
-    private SplashTimerPresenter timerPresenter;
+    private ISplashActivityContract.IPresenter timerPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
+    public void afterBindView()
     {
-        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_splash);  // 该方法将我自定义的xml文件加载到了系统的一个布局里，所以呈现出来的画面是我自定义的布局，加上系统自带的状态栏和导航栏
         initTimerPresenter();
         initListener();
         initVideo();
-
-        // 把初始化timer及相关内容抽离出 抽出到 presenter层
-//        initTimer();
     }
 
     private void initTimerPresenter()
@@ -65,6 +62,7 @@ public class SplashActivity extends BaseActivity
             public void onClick(View v)
             {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                finish();
             }
         });
 
@@ -78,12 +76,8 @@ public class SplashActivity extends BaseActivity
         });
     }
 
-    @Override
-    protected void onDestroy()
-    {
-        super.onDestroy();
-        timerPresenter.cancel();
-    }
+
+
 
     public void setTvTimer(String s)
     {

@@ -3,6 +3,7 @@ package com.Dzh.todayinformation.splash;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class SplashActivity extends BaseActivity implements ISplashActivityContr
     TextView mTvTimer;
 
     private ISplashActivityContract.IPresenter timerPresenter;
+    String TAG = "测试SplashAct";
 
     @Override
     public void afterBindView()
@@ -66,6 +68,7 @@ public class SplashActivity extends BaseActivity implements ISplashActivityContr
             }
         });
 
+
         mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
         {
             @Override
@@ -76,11 +79,17 @@ public class SplashActivity extends BaseActivity implements ISplashActivityContr
         });
     }
 
-
-
-
-    public void setTvTimer(String s)
+    public void setTvTimer(String s)  // 这个方法来自 ISplashActivityContract.IView 参数 s 是怎么传过来的
     {
+        Log.d(TAG, "setTvTimer:  s = " + s);
         mTvTimer.setText(s);
+        if(!s.equals("跳过"))
+        {
+            mTvTimer.setEnabled(false);
+        }
+        else
+        {
+            mTvTimer.setEnabled(true);
+        }
     }
 }

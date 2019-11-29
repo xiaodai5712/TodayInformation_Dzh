@@ -6,19 +6,22 @@ import androidx.fragment.app.Fragment;
 
 import com.Dzh.todayinformation.R;
 import com.Dzh.todayinformation.main.IMainActivityContract;
-import com.Dzh.todayinformation.main.shanghai.BeiJingFragment;
-import com.Dzh.todayinformation.main.shanghai.HangZhouFragment;
+import com.Dzh.todayinformation.main.beijing.BeiJingFragment;
+import com.Dzh.todayinformation.main.hangzhou.HangZhouFragment;
 import com.Dzh.todayinformation.main.shanghai.ShangHaiFragment;
-import com.Dzh.todayinformation.main.shanghai.ShenZhenFragment;
+import com.Dzh.todayinformation.main.shenzhen.ShenZhenFragment;
+import com.Dzh.todayinformation.main.tools.MainConstantTool;
 import com.Dzh.todayinformation.mvp.base.BaseMvpPresenter;
 
 public class MainActivityPresenter extends BaseMvpPresenter<IMainActivityContract.IView>implements  IMainActivityContract.IPresenter
 {
 
-    private int mCurrentFragmentIndex; // 当前Fragment脚标
+    private int mCurrentFragmentIndex; // 当前Fragment编号
     private Fragment[] mFragments = new Fragment[4];
-    private int mCurrentCheckedId;
+    private int mCurrentCheckedId; // 这个是 XML文件中 RadioButton的值 上海的button值为 mCurrentCheckedId = 2131230847
     String TAG = "测试MainActPresenter";
+    private int mTopPosition; // 标明上海杭州哪个被选定
+    private int mBottomPosition; //标明北京深圳哪个被选定
 
     public MainActivityPresenter(IMainActivityContract.IView view)
     {
@@ -34,12 +37,24 @@ public class MainActivityPresenter extends BaseMvpPresenter<IMainActivityContrac
     @Override
     public void initHomeFragment()
     {
-        mCurrentFragmentIndex = 0;
+        mCurrentFragmentIndex = MainConstantTool.SHANGHAI;  // 初始时，将当前的fragment 编号 设为0，即上海的Fragment
         replaceFragment(mCurrentFragmentIndex);
     }
 
+    @Override
+    public int getCurrentCheckedIndex()
+    {
+        return mCurrentFragmentIndex;
+    }
+
+    @Override
+    public int getCurrentCheckedId()
+    {
+        return mCurrentCheckedId;
+    }
+
     // 切换fragment的方法
-    private void replaceFragment(int mCurrentFragmentIndex )
+    public void replaceFragment(int mCurrentFragmentIndex )
     {
         for(int i = 0; i < mFragments.length; i++)
         {
@@ -65,7 +80,19 @@ public class MainActivityPresenter extends BaseMvpPresenter<IMainActivityContrac
         }
     }
 
-    // 记录当前Fragment 脚标
+    @Override
+    public int getTopPosition()
+    {
+        return mTopPosition;
+    }
+
+    @Override
+    public int getBottomPosition()
+    {
+        return mBottomPosition;
+    }
+
+    // 记录当前Fragment 序号
     private void setCurChecked(int mCurrentFragmentIndex)
     {
         this.mCurrentFragmentIndex = mCurrentFragmentIndex;
@@ -73,17 +100,20 @@ public class MainActivityPresenter extends BaseMvpPresenter<IMainActivityContrac
         {
             case 0:
                 mCurrentCheckedId = R.id.rb_main_shanghai;
-                Log.d(TAG, "setCurChecked: ");
-
+                Log.d(TAG, "mCurrentCheckedId = " + mCurrentCheckedId);
+                mTopPosition = MainConstantTool.SHANGHAI;
                 break;
             case 1:
                 mCurrentCheckedId = R.id.rb_main_hangzhou;
+                mTopPosition = MainConstantTool.HANGZHOU;
                 break;
             case 2:
                 mCurrentCheckedId = R.id.rb_main_beijing;
+                mBottomPosition = MainConstantTool.BEIJING;
                 break;
             case 3:
                 mCurrentCheckedId = R.id.rb_main_shenzhen;
+                mBottomPosition = MainConstantTool.SHENZHEN;
                 break;
         }
     }
@@ -97,38 +127,53 @@ public class MainActivityPresenter extends BaseMvpPresenter<IMainActivityContrac
             case 0:
             {
                 fragment = new ShangHaiFragment();
-                Log.d(TAG, "newCurrentFragment: ");
+                Log.d(TAG, "newCurrentFragment:  上海创建");
                 break;
             }
             case 1:
             {
                 fragment = new HangZhouFragment();
+                Log.d(TAG, "newCurrentFragment:  杭州创建");
                 break;
             }
             case 2:
             {
                 fragment = new BeiJingFragment();
+                Log.d(TAG, "newCurrentFragment:  北京创建");
                 break;
             }
             case 3:
             {
                 fragment = new ShenZhenFragment();
+                Log.d(TAG, "newCurrentFragment:  深圳创建");
                 break;
             }
         }
         mFragments[mCurrentFragmentIndex] = fragment;
+        Log.d(TAG, "newCurrentFragment: ");
+        if(fragment == null)
+        {
+            Log.d(TAG, "newCurrentFragment:   fragment == null");
+        }
+        else 
+        {
+            Log.d(TAG, "newCurrentFragment:  fragment ！= null");
+        }
         addAndShowFragment(fragment);
     }
 
     // 显示Fragment
     private void addAndShowFragment(Fragment mFragment)
     {
+        Log.d(TAG, "addAndShowFragment: " + mFragment.isAdded());
         if(mFragment.isAdded())
         {
+            Log.d(TAG, "addAndShowFragment:  加上了");
             getView().showFragment(mFragment);
         }
         else
         {
+            Log.d(TAG, "addAndShowFragment:  没加上返回空的");
             getView().addFragment(mFragment);
         }
     }

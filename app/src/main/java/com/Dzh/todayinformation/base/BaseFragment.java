@@ -54,7 +54,7 @@ public abstract class BaseFragment extends LifeCircleMvpFragment
         {
             throw new RuntimeException("annotation = null");
         }
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return mView;
     }
 
     private View initFragment(LayoutInflater inflater,int mainLayoutId)

@@ -20,6 +20,16 @@ public interface IMainActivityContract
     {
 
         void initHomeFragment();
+
+        int getCurrentCheckedIndex();
+
+        int getCurrentCheckedId();
+
+        void replaceFragment(int mCurrentFragmentIndex);
+        int getTopPosition();
+        int getBottomPosition();
+
+
     }
 
     IView emptyView = new IView()

@@ -20,12 +20,13 @@ public class SplashTimerPresenter extends BaseMvpPresenter<ISplashActivityContra
 
     public void initTimer()
     {
-        timer = new CustomCountDownTimer(5, new CustomCountDownTimer.ICountDownHandler()
+        timer = new CustomCountDownTimer(2, new CustomCountDownTimer.ICountDownHandler()
         {
             @Override
             public void onTicker(int time)
             {
                 getView().setTvTimer(time + "秒");
+
             }
 
             @Override

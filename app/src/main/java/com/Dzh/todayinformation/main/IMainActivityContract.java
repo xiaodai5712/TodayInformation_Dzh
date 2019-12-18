@@ -2,9 +2,10 @@ package com.Dzh.todayinformation.main;
 
 import androidx.fragment.app.Fragment;
 
-import com.Dzh.todayinformation.mvp.ILifeCircle;
-import com.Dzh.todayinformation.mvp.IMvpView;
-import com.Dzh.todayinformation.mvp.MvpController;
+import com.dzh.mvp.mvp.ILifeCircle;
+import com.dzh.mvp.mvp.IMvpView;
+import com.dzh.mvp.mvp.MvpController;
+
 
 public interface IMainActivityContract
 {

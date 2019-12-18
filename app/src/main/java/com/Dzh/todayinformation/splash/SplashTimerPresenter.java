@@ -2,7 +2,7 @@ package com.Dzh.todayinformation.splash;
 
 import android.util.Log;
 
-import com.Dzh.todayinformation.mvp.base.BaseMvpPresenter;
+import com.dzh.mvp.mvp.base.BaseMvpPresenter;
 
 
 public class SplashTimerPresenter extends BaseMvpPresenter<ISplashActivityContract.IView> implements ISplashActivityContract.IPresenter

@@ -15,7 +15,7 @@ import com.Dzh.todayinformation.base.BaseActivity;
 import com.Dzh.todayinformation.base.MainActivityPresenter;
 import com.Dzh.todayinformation.base.ViewInject;
 import com.Dzh.todayinformation.main.tools.MainConstantTool;
-import com.Dzh.todayinformation.mvp.presenter.LifeCircleMvpPresenter;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import butterknife.BindView;

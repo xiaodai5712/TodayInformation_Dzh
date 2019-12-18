@@ -11,9 +11,10 @@ import com.Dzh.todayinformation.main.hangzhou.HangZhouFragment;
 import com.Dzh.todayinformation.main.shanghai.ShangHaiFragment;
 import com.Dzh.todayinformation.main.shenzhen.ShenZhenFragment;
 import com.Dzh.todayinformation.main.tools.MainConstantTool;
-import com.Dzh.todayinformation.mvp.base.BaseMvpPresenter;
+import com.dzh.mvp.mvp.base.BaseMvpPresenter;
 
-public class MainActivityPresenter extends BaseMvpPresenter<IMainActivityContract.IView>implements  IMainActivityContract.IPresenter
+
+public class MainActivityPresenter extends BaseMvpPresenter<IMainActivityContract.IView> implements  IMainActivityContract.IPresenter
 {
 
     private int mCurrentFragmentIndex; // 当前Fragment编号

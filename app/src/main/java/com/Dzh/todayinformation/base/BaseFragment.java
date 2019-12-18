@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.Dzh.todayinformation.mvp.view.LifeCircleMvpActivity;
-import com.Dzh.todayinformation.mvp.view.LifeCircleMvpFragment;
+
+import com.dzh.mvp.mvp.view.LifeCircleMvpFragment;
 
 import butterknife.ButterKnife;
 
@@ -19,7 +19,7 @@ public abstract class BaseFragment extends LifeCircleMvpFragment
 {
 
 
-    private Context mContext;
+    protected Context mContext;
     private String TAG = "测试BaseFragment";
 
     @Override

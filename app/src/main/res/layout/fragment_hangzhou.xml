@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_hangzhou"
-        android:gravity="center"
-        android:text="@string/str_main_hangzhou"
-        android:textSize="@dimen/dp_40"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tl_tablayout"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabIndicatorHeight="@dimen/dp_2"
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabMode="fixed"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content">
+    </com.google.android.material.tabs.TabLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.viewpager.widget.ViewPager>
 
 </LinearLayout>

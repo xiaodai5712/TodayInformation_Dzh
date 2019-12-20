@@ -11,12 +11,14 @@ import butterknife.BindView;
 @ViewInject(mainLayoutId = R.layout.fragment_beijing)
 public class BeiJingFragment extends BaseFragment
 {
+
+
     @BindView(R.id.tv_beijing_fragment)
     TextView tvBeijingFragment;
 
     @Override
     public void afterBindView()
     {
-        tvBeijingFragment.setText("我是北京");
+
     }
 }

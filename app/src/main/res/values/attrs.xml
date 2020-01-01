@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="JikeLikeView">
+        <attr name="is_like" format="boolean"/>
+    </declare-styleable>
+</resources>

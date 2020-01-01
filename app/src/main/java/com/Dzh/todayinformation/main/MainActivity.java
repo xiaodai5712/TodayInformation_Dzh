@@ -1,10 +1,13 @@
 package com.Dzh.todayinformation.main;
 
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -16,6 +19,7 @@ import com.Dzh.todayinformation.base.MainActivityPresenter;
 import com.Dzh.todayinformation.base.ViewInject;
 import com.Dzh.todayinformation.main.tools.MainConstantTool;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import butterknife.BindView;
@@ -29,11 +33,11 @@ public class MainActivity extends BaseActivity implements IMainActivityContract.
     @BindView(R.id.fac_main_home)
     FloatingActionButton facMainHome;
     @BindView(R.id.rb_main_shanghai)
-    RadioButton rbMainShanghai;
+    LottieAnimationView rbMainShanghai;
     @BindView(R.id.rb_main_hangzhou)
-    RadioButton rbMainHangzhou;
+    LottieAnimationView rbMainHangzhou;
     @BindView(R.id.main_rg_top)
-    RadioGroup mainRgTop;
+    LinearLayout mainRgTop;
     @BindView(R.id.fl_main_bottom)
     FrameLayout flMainBottom;
     @BindView(R.id.rb_main_beijing)
@@ -50,40 +54,75 @@ public class MainActivity extends BaseActivity implements IMainActivityContract.
     @Override
     public void afterBindView()
     {
-        changeAnim(mainRgBottom,mainRgTop);
+        changeAnim(mainRgBottom, mainRgTop);
         initHomeFragment();
         initClickListener();
     }
 
     private void initClickListener()
     {
-        rbMainShanghai.setChecked(true);
-        mainRgTop.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        rbMainShanghai.playAnimation();
+        rbMainShanghai.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId)
+            public void onClick(View v)
             {
-                if(checkedId == mPresenter.getCurrentCheckedId())
-                    return;
-                switch (checkedId)
+                rbMainShanghai.playAnimation();
+
+                if (rbMainShanghai.getId() == mPresenter.getCurrentCheckedId())
                 {
-                    case R.id.rb_main_shanghai:
-                        Log.d(TAG, "onCheckedChanged: 走了这里");
-                        mPresenter.replaceFragment(MainConstantTool.SHANGHAI);
-                        break;
-                    case R.id.rb_main_hangzhou:
-                        mPresenter.replaceFragment(MainConstantTool.HANGZHOU);
-                        break;
+                    return;
                 }
+                rbMainHangzhou.reverseAnimation();
+                mPresenter.replaceFragment(MainConstantTool.SHANGHAI);
+
+            }
+
+        });
+
+        rbMainHangzhou.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                rbMainHangzhou.playAnimation();
+
+                if (rbMainHangzhou.getId() == mPresenter.getCurrentCheckedId())
+                {
+                    return;
+                }
+                rbMainShanghai.reverseAnimation();
+                mPresenter.replaceFragment(MainConstantTool.HANGZHOU);
+
             }
         });
+//        rbMainShanghai.setChecked(true);
+//        mainRgTop.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+//        {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId)
+//            {
+//                if(checkedId == mPresenter.getCurrentCheckedId())
+//                    return;
+//                switch (checkedId)
+//                {
+//                    case R.id.rb_main_shanghai:
+//                        Log.d(TAG, "onCheckedChanged: 走了这里");
+//                        mPresenter.replaceFragment(MainConstantTool.SHANGHAI);
+//                        break;
+//                    case R.id.rb_main_hangzhou:
+//                        mPresenter.replaceFragment(MainConstantTool.HANGZHOU);
+//                        break;
+//                }
+//            }
+//        });
 
         mainRgBottom.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId)
             {
-                if(checkedId == mPresenter.getCurrentCheckedId())
+                if (checkedId == mPresenter.getCurrentCheckedId())
                 {
                     return;
                 }
@@ -113,14 +152,13 @@ public class MainActivity extends BaseActivity implements IMainActivityContract.
         {
             case R.id.fac_main_home:
                 isChangeTopOrBottom = !isChangeTopOrBottom;
-                if(isChangeTopOrBottom)
+                if (isChangeTopOrBottom)
                 {
-                    changeAnim(mainRgTop,mainRgBottom);
+                    changeAnim(mainRgTop, mainRgBottom);
                     handleTopPosition();
-                }
-                else
+                } else
                 {
-                    changeAnim(mainRgBottom,mainRgTop);
+                    changeAnim(mainRgBottom, mainRgTop);
                     handleBottomPosition();
                 }
                 break;
@@ -130,46 +168,44 @@ public class MainActivity extends BaseActivity implements IMainActivityContract.
     // 北京 深圳
     private void handleBottomPosition()
     {
-        Log.d(TAG, "handleBottomPosition: 当前的fragment 编号是 ：" + mPresenter.getCurrentCheckedIndex() );
-        if(mPresenter.getTopPosition() != MainConstantTool.HANGZHOU)
+        Log.d(TAG, "handleBottomPosition: 当前的fragment 编号是 ：" + mPresenter.getCurrentCheckedIndex());
+        if (mPresenter.getTopPosition() != MainConstantTool.HANGZHOU)
         {
             mPresenter.replaceFragment(MainConstantTool.SHANGHAI);
-            rbMainShanghai.setChecked(true);
-        }
-        else
+            rbMainShanghai.playAnimation();
+        } else
         {
             mPresenter.replaceFragment(MainConstantTool.HANGZHOU);
-            rbMainHangzhou.setChecked(true);
+            rbMainHangzhou.playAnimation();
         }
     }
 
     // 上海杭州
     private void handleTopPosition()
     {
-        Log.d(TAG, "handleBottomPosition: 当前的fragment 编号是 ：" + mPresenter.getCurrentCheckedIndex() );
-        if(mPresenter.getBottomPosition() != MainConstantTool.SHENZHEN)
+        Log.d(TAG, "handleBottomPosition: 当前的fragment 编号是 ：" + mPresenter.getCurrentCheckedIndex());
+        if (mPresenter.getBottomPosition() != MainConstantTool.SHENZHEN)
         {
             mPresenter.replaceFragment(MainConstantTool.BEIJING);
             rbMainBeijing.setChecked(true);
-        }
-        else
+        } else
         {
             mPresenter.replaceFragment(MainConstantTool.SHENZHEN);
             rbMainShenzhen.setChecked(true);
         }
     }
 
-    private void changeAnim(RadioGroup gone,RadioGroup show)
+    private void changeAnim(ViewGroup gone, ViewGroup show)
     {
         // 消失的动画  translate 代表位移 alpha代表淡出淡入
         gone.clearAnimation(); // 清除自身动画
-        Animation animationGone = AnimationUtils.loadAnimation(this,R.anim.main_tab_translate_hide);
+        Animation animationGone = AnimationUtils.loadAnimation(this, R.anim.main_tab_translate_hide);
         gone.startAnimation(animationGone);
         gone.setVisibility(View.GONE);
 
         // 展示的动画
         show.clearAnimation();
-        Animation animationShow = AnimationUtils.loadAnimation(this,R.anim.main_tab_translate_show);
+        Animation animationShow = AnimationUtils.loadAnimation(this, R.anim.main_tab_translate_show);
         show.startAnimation(animationShow);
         show.setVisibility(View.VISIBLE);
     }
@@ -187,7 +223,7 @@ public class MainActivity extends BaseActivity implements IMainActivityContract.
     public void addFragment(Fragment mFragment)
     {
         Log.d(TAG, "addFragment: ");
-        getSupportFragmentManager().beginTransaction().add(R.id.fl_main_content,mFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fl_main_content, mFragment).commit();
 
     }
 
@@ -195,5 +231,11 @@ public class MainActivity extends BaseActivity implements IMainActivityContract.
     public void hideFragment(Fragment mFragment)
     {
         getSupportFragmentManager().beginTransaction().hide(mFragment).commit();
+    }
+
+    @Override
+    public boolean dispatchGenericMotionEvent(MotionEvent ev)
+    {
+        return super.dispatchGenericMotionEvent(ev);
     }
 }

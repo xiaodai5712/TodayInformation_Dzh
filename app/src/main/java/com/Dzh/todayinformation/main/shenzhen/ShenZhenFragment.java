@@ -16,9 +16,10 @@ import butterknife.BindView;
 @ViewInject(mainLayoutId = R.layout.fragment_shenzhen)
 public class ShenZhenFragment extends BaseFragment
 {
-    private String TAG = "ShenZhenFragment";
     @BindView(R.id.tv_shenzhen_fragment)
     TextView tvShenzhenFragment;
+    private String TAG = "ShenZhenFragment";
+
 
     @Override
     public void afterBindView()
@@ -30,7 +31,7 @@ public class ShenZhenFragment extends BaseFragment
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser)
     {
-        if(isVisibleToUser)
+        if (isVisibleToUser)
         {
             // 加载网络数据
         }

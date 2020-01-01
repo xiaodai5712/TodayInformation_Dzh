@@ -5,4 +5,5 @@
     <string name="str_main_beijing">北京</string>
     <string name="str_main_shenzhen">深圳</string>
     <string name="str_shanghai">上海</string>
+    <string name="bottom_show_beavior" >com.Dzh.todayinformation.main.hangzhou.design.BottomShowBehavior</string>
 </resources>

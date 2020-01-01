@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.Dzh.todayinformation.R;
 import com.Dzh.todayinformation.base.BaseFragment;
 import com.Dzh.todayinformation.base.ViewInject;
+import com.Dzh.todayinformation.main.hangzhou.adapter.HangzhouViewPagerAdapter;
 import com.Dzh.todayinformation.main.hangzhou.view.ZhiHuFragment;
 import com.Dzh.todayinformation.main.shenzhen.ShenZhenFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -27,36 +28,14 @@ public class HangZhouFragment extends BaseFragment
     TabLayout tlTablayout;
     @BindView(R.id.vp_viewpager)
     ViewPager vpViewpager;
-    ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
     public void afterBindView()
     {
-        for (int i = 0; i <5 ; i++)
-        {
-            arrayList.add("深圳");
-        }
         tlTablayout.setupWithViewPager(vpViewpager);
-        vpViewpager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager())
-        {
-            @Override
-            public Fragment getItem(int position)
-            {
+        HangzhouViewPagerAdapter hangzhouViewPagerAdapter = new HangzhouViewPagerAdapter(getChildFragmentManager());
+        vpViewpager.setAdapter(hangzhouViewPagerAdapter);
 
-                return new ZhiHuFragment();
-            }
-
-            @Override
-            public int getCount()
-            {
-                return 1;
-            }
-            @Override
-            public CharSequence getPageTitle(int position)
-            {
-                return "知乎";
-            }
-        });
 
     }
 }

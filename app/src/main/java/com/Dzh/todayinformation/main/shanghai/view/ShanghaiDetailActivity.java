@@ -14,6 +14,7 @@ import androidx.core.util.Pair;
 import com.Dzh.todayinformation.R;
 import com.Dzh.todayinformation.base.BaseActivity;
 import com.Dzh.todayinformation.base.ViewInject;
+import com.Dzh.todayinformation.main.shanghai.dto.ShangHaiDetailBean;
 import com.Dzh.todayinformation.main.shanghai.lf.IShanghaiDetailContract;
 import com.Dzh.todayinformation.main.shanghai.presenter.ShanghaiDetailPresenter;
 
@@ -72,7 +73,7 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
 
     private void initGetNetData()
     {
-        mPresenter.getNetData();
+        mPresenter.getNetData(20);
 //        GetXiaoHuatTask task = new GetXiaoHuatTask();
 //        task.execute("desc","1","1");
 
@@ -136,4 +137,9 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
 
     }
 
+    @Override
+    public void showData(ShangHaiDetailBean data)
+    {
+
+    }
 }

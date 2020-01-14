@@ -2,6 +2,7 @@ package com.Dzh.todayinformation.main;
 
 import androidx.fragment.app.Fragment;
 
+import com.dzh.annotation.MvpEmptyViewFactory;
 import com.dzh.mvp.mvp.ILifeCircle;
 import com.dzh.mvp.mvp.IMvpView;
 import com.dzh.mvp.mvp.MvpController;
@@ -9,6 +10,7 @@ import com.dzh.mvp.mvp.MvpController;
 
 public interface IMainActivityContract
 {
+    @MvpEmptyViewFactory
     interface IView extends IMvpView
     {
 
@@ -33,32 +35,4 @@ public interface IMainActivityContract
 
     }
 
-    IView emptyView = new IView()
-    {
-
-
-        @Override
-        public MvpController getMvpController()
-        {
-            return null;
-        }
-
-        @Override
-        public void showFragment(Fragment mFragment)
-        {
-
-        }
-
-        @Override
-        public void addFragment(Fragment mFragment)
-        {
-
-        }
-
-        @Override
-        public void hideFragment(Fragment mFragment)
-        {
-
-        }
-    };
 }

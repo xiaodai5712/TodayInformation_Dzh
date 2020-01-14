@@ -40,6 +40,11 @@ dependencies {
     implementation project(path: ':http')
     implementation project(path: ':task')
     implementation project(path: ':refresh')
+    implementation project(path: ':player')
     // lottie
     implementation 'com.airbnb.android:lottie:2.2.5'
+    //apt
+    implementation project(':annotation')
+    annotationProcessor project(':apt')
 }
+

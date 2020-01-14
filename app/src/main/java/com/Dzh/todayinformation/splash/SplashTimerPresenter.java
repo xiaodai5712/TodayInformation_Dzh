@@ -2,10 +2,11 @@ package com.Dzh.todayinformation.splash;
 
 import android.util.Log;
 
+import com.Dzh.todayinformation.base.BasePresenter;
 import com.dzh.mvp.mvp.base.BaseMvpPresenter;
 
 
-public class SplashTimerPresenter extends BaseMvpPresenter<ISplashActivityContract.IView> implements ISplashActivityContract.IPresenter
+public class SplashTimerPresenter extends BasePresenter<ISplashActivityContract.IView> implements ISplashActivityContract.IPresenter
 {
 
 
@@ -59,10 +60,10 @@ public class SplashTimerPresenter extends BaseMvpPresenter<ISplashActivityContra
         Log.e(TAG, "onDestroy: ggg  ");
     }
 
-    // 防止空指针
-    @Override
-    protected ISplashActivityContract.IView getEmptyView()
-    {
-        return ISplashActivityContract.emptyView;
-    }
+//    // 防止空指针
+//    @Override
+//    protected ISplashActivityContract.IView getEmptyView()
+//    {
+//        return ISplashActivityContract.emptyView;
+//    }
 }

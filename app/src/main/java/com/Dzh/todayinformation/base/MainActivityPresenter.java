@@ -1,5 +1,7 @@
 package com.Dzh.todayinformation.base;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
@@ -14,14 +16,14 @@ import com.Dzh.todayinformation.main.tools.MainConstantTool;
 import com.dzh.mvp.mvp.base.BaseMvpPresenter;
 
 
-public class MainActivityPresenter extends BaseMvpPresenter<IMainActivityContract.IView> implements  IMainActivityContract.IPresenter
+public class MainActivityPresenter extends BasePresenter<IMainActivityContract.IView> implements  IMainActivityContract.IPresenter
 {
 
     private int mCurrentFragmentIndex; // 当前Fragment编号
     private Fragment[] mFragments = new Fragment[4];
     private int mCurrentCheckedId; // 这个是 XML文件中 RadioButton的值 上海的button值为 mCurrentCheckedId = 2131230847
     String TAG = "测试MainActPresenter";
-    private int mTopPosition; // 标明上海杭州哪个被选定
+    private int mTopPosition; // 标明上海杭州哪个被选定   标明上海杭州 哪个被选
     private int mBottomPosition; //标明北京深圳哪个被选定
 
     public MainActivityPresenter(IMainActivityContract.IView view)
@@ -29,11 +31,11 @@ public class MainActivityPresenter extends BaseMvpPresenter<IMainActivityContrac
         super(view);
     }
 
-    @Override
-    protected IMainActivityContract.IView getEmptyView()
-    {
-        return IMainActivityContract.emptyView;
-    }
+//    @Override
+//    protected IMainActivityContract.IView getEmptyView()
+//    {
+//        return IMainActivityContract.emptyView;
+//    }
 
     @Override
     public void initHomeFragment()
@@ -187,4 +189,5 @@ public class MainActivityPresenter extends BaseMvpPresenter<IMainActivityContrac
             getView().hideFragment(mFragment);
         }
     }
+
 }

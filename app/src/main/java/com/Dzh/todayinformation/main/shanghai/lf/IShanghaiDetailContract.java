@@ -4,12 +4,14 @@ import androidx.fragment.app.Fragment;
 
 import com.Dzh.todayinformation.main.IMainActivityContract;
 import com.Dzh.todayinformation.main.shanghai.dto.ShangHaiDetailBean;
+import com.dzh.annotation.MvpEmptyViewFactory;
 import com.dzh.mvp.mvp.ILifeCircle;
 import com.dzh.mvp.mvp.IMvpView;
 import com.dzh.mvp.mvp.MvpController;
 
 public interface IShanghaiDetailContract
 {
+    @MvpEmptyViewFactory
     interface IView extends IMvpView
     {
 
@@ -22,18 +24,18 @@ public interface IShanghaiDetailContract
         void getNetData(int pagesize);
     }
 
-    IShanghaiDetailContract.IView emptyView = new IShanghaiDetailContract.IView()
-    {
-        @Override
-        public MvpController getMvpController()
-        {
-            return null;
-        }
-
-        @Override
-        public void showData(ShangHaiDetailBean data)
-        {
-
-        }
-    };
+//    IShanghaiDetailContract.IView emptyView = new IShanghaiDetailContract.IView()
+//    {
+//        @Override
+//        public MvpController getMvpController()
+//        {
+//            return null;
+//        }
+//
+//        @Override
+//        public void showData(ShangHaiDetailBean data)
+//        {
+//
+//        }
+//    };
 }

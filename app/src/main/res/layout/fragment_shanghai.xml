@@ -26,18 +26,41 @@
                 android:src="@mipmap/shanghai"/>
 
             <androidx.appcompat.widget.Toolbar
+                app:contentInsetStart="@dimen/dp_0"
                 app:layout_collapseMode="pin"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize">
-                <TextView
-                    android:id="@+id/tv_shanghai_welcome"
-                    android:textColor="@color/colorWrite"
-                    android:text="上海欢迎您"
-                    android:gravity="center"
-                    android:layout_gravity="center"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone"/>
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:visibility="gone"
+                        android:background="@drawable/shape_splash"
+                        android:id="@+id/tv_shanghai_welcome"
+                        android:textColor="@color/colorWrite"
+                        android:text="今日播报"
+                        android:gravity="center"
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <com.Dzh.todayinformation.main.shanghai.view.MarqueeTextView
+                        android:visibility="gone"
+                        android:id="@+id/tv_marquee_title"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:text="当前歌曲：缘分一道桥"
+                        android:ellipsize="marquee"
+                        android:singleLine="true"
+                        android:textSize="@dimen/dp_20"
+                        android:textColor="@color/color_ff7f1d"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/tv_shanghai_welcome"
+                        android:layout_width="@dimen/dp_100"
+                        android:layout_height="wrap_content"/>
+                </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

@@ -4,6 +4,8 @@
     package="com.Dzh.todayinformation">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <application
         android:name=".base.TodayInformationApplication"
         android:allowBackup="true"
@@ -20,8 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <provider
+            android:authorities="com.Dzh.today.process.data"
+            android:name=".main.beijing.MainProcessDataProvider"/>
+
+        <service android:name=".main.beijing.MainProcessService"/>
         <activity android:name=".main.MainActivity" android:theme="@style/DzhNoActionBar"/>
-        <activity android:name=".main.shanghai.view.ShanghaiDetailActivity" android:theme="@style/DzhNoActionBar"/>
+        <activity
+            android:process=":shanghai.detail"
+            android:name=".main.shanghai.view.ShanghaiDetailActivity" android:theme="@style/DzhNoActionBar"/>
 
         <meta-data
             android:name="playertype"

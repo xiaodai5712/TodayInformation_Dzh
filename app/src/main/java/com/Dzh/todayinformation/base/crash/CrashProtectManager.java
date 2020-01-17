@@ -74,6 +74,7 @@ public class CrashProtectManager
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
             {
                 File cacheDir = mContext.getCacheDir();
+
                 if (!cacheDir.exists())
                 {
                     cacheDir.mkdirs();

@@ -41,6 +41,7 @@ dependencies {
     implementation project(path: ':task')
     implementation project(path: ':refresh')
     implementation project(path: ':player')
+    implementation project(path: ':ipc')
     // lottie
     implementation 'com.airbnb.android:lottie:2.2.5'
     //apt

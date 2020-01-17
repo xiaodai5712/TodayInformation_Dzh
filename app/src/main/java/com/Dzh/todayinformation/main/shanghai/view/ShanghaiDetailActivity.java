@@ -1,11 +1,21 @@
 package com.Dzh.todayinformation.main.shanghai.view;
 
 import android.app.Activity;
+import android.app.Service;
+import android.content.ComponentName;
+import android.content.ContentValues;
 import android.content.Intent;;
+import android.content.ServiceConnection;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
@@ -14,9 +24,14 @@ import androidx.core.util.Pair;
 import com.Dzh.todayinformation.R;
 import com.Dzh.todayinformation.base.BaseActivity;
 import com.Dzh.todayinformation.base.ViewInject;
+import com.Dzh.todayinformation.main.beijing.MainProcessService;
 import com.Dzh.todayinformation.main.shanghai.dto.ShangHaiDetailBean;
 import com.Dzh.todayinformation.main.shanghai.lf.IShanghaiDetailContract;
 import com.Dzh.todayinformation.main.shanghai.presenter.ShanghaiDetailPresenter;
+import com.dzh.ipc.CallBack;
+import com.dzh.ipc.IpcManager;
+import com.dzh.ipc.request.IpcRequest;
+import com.dzh.ipc.result.IResult;
 
 import java.io.IOException;
 
@@ -36,6 +51,44 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
     public static String mActivityOptionsCompat = "ShanghaiDetailActivity";
     @BindView(R.id.iv_shanghai_detail)
     ImageView ivShanghaiDetail;
+    private String TAG = "ShanghaiDetailActivity";
+    private Messenger messenger;
+    private Handler handler= new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg)
+        {
+            Bundle data = msg.getData();
+            Log.e(TAG, "handleMessage: data =" + data.getString("data") );
+        }
+    };
+    private Messenger messengerClient = new Messenger(handler);
+
+    private ServiceConnection mConnection = new ServiceConnection()
+    {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service)
+        {
+            messenger = new Messenger(service);
+            Message message = new Message();
+            message.what = MainProcessService.SHANGHAI_DETAIL;
+            message.replyTo = messengerClient;
+            try
+            {
+                messenger.send(message);
+            } catch (RemoteException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name)
+        {
+
+        }
+    };
+
 
     @Override
     public void afterBindView()
@@ -43,15 +96,46 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
         initAnim();
         initGetNetData();
 //        initPostNetData();
-        ivShanghaiDetail.setOnClickListener(new View.OnClickListener()
+//        initProviderData();
+//        initProcessService();
+        initIpc();
+    }
+
+    private void initIpc()
+    {
+        IpcRequest request = new IpcRequest("shanghaiDetail");
+        IpcManager.getInstance(this).executeAsync(request, new CallBack()
         {
             @Override
-            public void onClick(View v)
+            public void callBack(IResult result)
             {
-                String s = null;
-                s.toString();
+                String data = result.data();
+                Log.e(TAG, "callBack: data = " + data );
             }
         });
+
+//        IResult result = IpcManager.getInstance(this).executeSync(request);
+//        Log.e(TAG, "initIpc: 同步请求 data = " + result.data() );
+    }
+
+
+    private void initProcessService()
+    {
+        Intent intent = new Intent(this, MainProcessService.class);
+        bindService(intent,mConnection,Service.BIND_AUTO_CREATE);
+    }
+
+    private void initProviderData()
+    {
+        Uri uri = getContentResolver().insert(Uri.parse("content://com.Dzh.today.process.data"), new ContentValues());
+        Log.e(TAG, "initProviderData: processDec = " + uri.toString());
+    }
+
+
+    // 内容提供者，供其他进程或者进程中的类去访问相应的数据
+    private void initContentProvider()
+    {
+
     }
 
     private void initPostNetData()
@@ -150,5 +234,12 @@ public class ShanghaiDetailActivity extends BaseActivity implements IShanghaiDet
     public void showData(ShangHaiDetailBean data)
     {
 
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        //unbindService(mConnection);
     }
 }

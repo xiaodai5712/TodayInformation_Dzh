@@ -9,6 +9,18 @@
         android:text="@string/str_main_beijing"
         android:textSize="@dimen/dp_40"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="@dimen/dp_50"/>
+    <Button
+        android:id="@+id/btn_beijing_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:text="点吧"
+        android:textSize="@dimen/dp_20"/>
+    <Button
+        android:id="@+id/btn_permission_beijing_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"
+        android:text="权限检测"
+        android:textSize="@dimen/dp_20"/>
 
 </LinearLayout>

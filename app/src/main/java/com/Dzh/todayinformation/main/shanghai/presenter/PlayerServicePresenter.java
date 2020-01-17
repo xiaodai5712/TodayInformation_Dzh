@@ -63,7 +63,7 @@ public class PlayerServicePresenter extends BasePresenter<IPlayerServiceContract
         else
         {
             Intent intent = new Intent(context, PlayerService.class);
-            context.bindService(intent,mConnection, Service.BIND_AUTO_CREATE);
+            context.bindService(intent,mConnection,Service.BIND_AUTO_CREATE);
         }
 
     }
